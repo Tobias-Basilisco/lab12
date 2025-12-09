@@ -46,7 +46,15 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Boolean> enabledStates() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        List<Boolean> states = new ArrayList<>();
+        slots.forEach( s -> {
+            if (s < slots.size()){
+                states.add(true);
+            } else{
+                states.add(false);
+            }
+        });
+        return states;
     }
 
     /**
