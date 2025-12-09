@@ -62,7 +62,8 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int hit(final int elem) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        slots.set(elem, slots.get(elem) + 1 );
+        return slots.get(elem);
     }
 
     /**
