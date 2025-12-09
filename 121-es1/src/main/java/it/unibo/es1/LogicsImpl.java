@@ -2,6 +2,7 @@ package it.unibo.es1;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 public class LogicsImpl implements Logics {
 
     private static final String ERROR_MESSAGE = "Unimplemented method";
-    private List<slot> slots = new ArrayList<>();
+    private List<Integer> slots = new ArrayList<>();
 
     /**
      * Constructor.
@@ -37,11 +38,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        final List<Integer> hits = new ArrayList<>();
-        slots.forEach( s -> {
-            hits.add(s.getHits());
-        });
-        return hits;
+        return Collections.unmodifiableList(slots);
     }
 
     /**
@@ -76,24 +73,24 @@ public class LogicsImpl implements Logics {
         throw new UnsupportedOperationException(ERROR_MESSAGE);
     }
 
-    private class slot{
-        private int hits = 0;
-        private boolean enabled = true;
+    // private class slot{
+    //     private int hits = 0;
+    //     private boolean enabled = true;
 
-        public int getHits() {
-            return hits;
-        }
+    //     public int getHits() {
+    //         return hits;
+    //     }
 
-        public boolean isEnabled() {
-            return enabled;
-        }
+    //     public boolean isEnabled() {
+    //         return enabled;
+    //     }
 
-        public void increment(){
-            hits++;
-        }
+    //     public void increment(){
+    //         hits++;
+    //     }
 
-        public void disable(){
-            enabled = false;
-        }
-    }
+    //     public void disable(){
+    //         enabled = false;
+    //     }
+    // }
 }
