@@ -92,7 +92,12 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public boolean toQuit() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        for (final int s : slots){
+            if (s != slots.get(0)){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
