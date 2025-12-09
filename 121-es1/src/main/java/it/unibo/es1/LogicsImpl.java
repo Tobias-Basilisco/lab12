@@ -12,6 +12,8 @@ public class LogicsImpl implements Logics {
 
     private static final String ERROR_MESSAGE = "Unimplemented method";
     private List<Integer> slots = new ArrayList<>();
+    private final String START_RESULT = "<<";
+    private final String END_RESULT = ">>";
 
     /**
      * Constructor.
@@ -71,7 +73,18 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(START_RESULT);
+        for (int i = 0; i < slots.size(); i++){
+            stringBuilder.append(String.valueOf(slots.get(i)));
+            if (i < slots.size() -1){
+                stringBuilder.append("|");
+            } else{
+                stringBuilder.append(END_RESULT);
+            }
+        } 
+
+        return stringBuilder.toString();
     }
 
     /**
@@ -82,24 +95,4 @@ public class LogicsImpl implements Logics {
         throw new UnsupportedOperationException(ERROR_MESSAGE);
     }
 
-    // private class slot{
-    //     private int hits = 0;
-    //     private boolean enabled = true;
-
-    //     public int getHits() {
-    //         return hits;
-    //     }
-
-    //     public boolean isEnabled() {
-    //         return enabled;
-    //     }
-
-    //     public void increment(){
-    //         hits++;
-    //     }
-
-    //     public void disable(){
-    //         enabled = false;
-    //     }
-    // }
 }
