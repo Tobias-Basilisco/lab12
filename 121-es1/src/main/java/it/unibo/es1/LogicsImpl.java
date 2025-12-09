@@ -1,5 +1,7 @@
 package it.unibo.es1;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +10,7 @@ import java.util.List;
 public class LogicsImpl implements Logics {
 
     private static final String ERROR_MESSAGE = "Unimplemented method";
+    private List<slot> slots = new ArrayList<>();
 
     /**
      * Constructor.
@@ -15,7 +18,10 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        if (size < 0){
+            throw new InvalidParameterException("slot quantity must be higher than 0");
+        }
+        slots = new ArrayList<>(size);
     }
 
     /**
@@ -23,7 +29,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return slots.size();
     }
 
     /**
@@ -31,7 +37,11 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        final List<Integer> hits = new ArrayList<>();
+        slots.forEach( s -> {
+            hits.add(s.getHits());
+        });
+        return hits;
     }
 
     /**
@@ -64,5 +74,26 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toQuit() {
         throw new UnsupportedOperationException(ERROR_MESSAGE);
+    }
+
+    private class slot{
+        private int hits = 0;
+        private boolean enabled = true;
+
+        public int getHits() {
+            return hits;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void increment(){
+            hits++;
+        }
+
+        public void disable(){
+            enabled = false;
+        }
     }
 }
