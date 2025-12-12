@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class LogicsImpl implements Logics {
 
-    private static final String ERROR_MESSAGE = "Unimplemented method";
     private List<Integer> slots = new ArrayList<>();
     private final String START_RESULT = "<<";
     private final String END_RESULT = ">>";
@@ -24,7 +23,7 @@ public class LogicsImpl implements Logics {
         if (size < 0){
             throw new InvalidParameterException("slot quantity must be higher than 0");
         }
-        slots = new ArrayList<>(size);
+        slots = Collections.nCopies(size, 0);
     }
 
     /**
