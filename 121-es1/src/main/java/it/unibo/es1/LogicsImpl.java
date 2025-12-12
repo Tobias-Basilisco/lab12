@@ -11,8 +11,9 @@ import java.util.List;
 public class LogicsImpl implements Logics {
 
     private List<Integer> slots = new ArrayList<>();
-    private final String START_RESULT = "<<";
-    private final String END_RESULT = ">>";
+    private final String RESULT_START = "<<";
+    private final String RESULT_END = ">>";
+    private final String RESULT_SEPARATOR = "|";
 
     /**
      * Constructor.
@@ -73,13 +74,13 @@ public class LogicsImpl implements Logics {
     @Override
     public String result() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(START_RESULT);
+        stringBuilder.append(RESULT_START);
         for (int i = 0; i < slots.size(); i++){
             stringBuilder.append(String.valueOf(slots.get(i)));
             if (i < slots.size() -1){
-                stringBuilder.append("|");
+                stringBuilder.append(RESULT_SEPARATOR);
             } else{
-                stringBuilder.append(END_RESULT);
+                stringBuilder.append(RESULT_END);
             }
         } 
 
