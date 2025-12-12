@@ -24,8 +24,14 @@ public class LogicsImpl implements Logics {
      * {@inheritDoc}
      */
     @Override
-    public void toggleSpot(Pair<Integer, Integer> position){
-
+    public boolean toggleSpot(Pair<Integer, Integer> position){
+        if (true == grid.get(position)){
+            grid.put(position, false);
+            return false;
+        } else{
+            grid.put(position, true);
+            return true;
+        }
     }
     
     /**
