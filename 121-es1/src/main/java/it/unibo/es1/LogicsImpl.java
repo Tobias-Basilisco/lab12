@@ -23,7 +23,7 @@ public class LogicsImpl implements Logics {
         if (size < 0){
             throw new InvalidParameterException("slot quantity must be higher than 0");
         }
-        slots = Collections.nCopies(size, 0);
+        slots = new ArrayList<>(Collections.nCopies(size, 0));
     }
 
     /**
