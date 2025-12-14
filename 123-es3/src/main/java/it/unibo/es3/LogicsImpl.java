@@ -1,5 +1,6 @@
 package it.unibo.es3;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -14,7 +15,6 @@ public class LogicsImpl implements Logics{
     private int gridWidth;
     private int stageInedex = -1;
     private final Set<Pair<Integer, Integer>> startingPoints = new LinkedHashSet<>();
-    private int startingPointsQuantity;
 
     public LogicsImpl(final int gridWidth, final int startingPointsQuantity){
 
@@ -38,18 +38,29 @@ public class LogicsImpl implements Logics{
     /**
      * {@inheritDoc}
      */
-    public List<Integer> start(){
+    public List<Integer> start(final int startingPointsQuantity){
 
+        if (startingPointsQuantity >= gridWidth * gridWidth) {
+            throw new IllegalArgumentException("too many starting points");
+        }   
+
+        final List<Integer> statingPointsIndex = new ArrayList<>();
         final Random random = new Random();
         int pointsCreated = 0;
 
         while (pointsCreated < startingPointsQuantity){
+
             int point = random.nextInt(gridWidth * gridWidth);
+            if (!startingPoints.contains(intToPair(point))){
+                startingPoints.add(intToPair(point));
+                statingPointsIndex.add(point);
+                pointsCreated++;
+            }
 
         }
 
         stageInedex++;
-        return Collections.unmodifiableList(null);
+        return Collections.unmodifiableList(statingPointsIndex);
     }
 
     /**

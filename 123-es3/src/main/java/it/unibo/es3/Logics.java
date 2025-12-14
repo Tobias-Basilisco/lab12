@@ -8,7 +8,7 @@ public interface Logics {
      * turns on the starting spots
      * @return list of indexes to turn on
      */
-    List<Integer> start();
+    List<Integer> start(final int startingPointsQuantity);
 
     /**
      * turns on the required spots from game logic
