@@ -19,6 +19,10 @@ public final class GUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private final List<JButton> cells = new ArrayList<>();
     private final String NEXT_TEXT = ">";
+    private final int STARTING_POINTS_QUANTITY = 3;
+    private Logics logics;
+    private final String ON = "*";
+    private final String OFF = " ";
 
     /**
      * Constructor.
@@ -27,22 +31,29 @@ public final class GUI extends JFrame {
      */
     public GUI(final int width) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.logics = new LogicsImpl(width);
         // Create a panel with a grid layout
         final JPanel panel = new JPanel(new GridLayout(width, width));
         this.getContentPane().add(BorderLayout.CENTER, panel);
         // Create buttons and add them to the panel
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < width; j++) {
-                final var pos = new Pair<>(j, i);
-                final JButton button = new JButton(pos.toString());
+                final JButton button = new JButton(OFF);
                 this.cells.add(button);
-                button.addActionListener(e -> button.setText(String.valueOf(cells.indexOf(button))));
                 panel.add(button);
             }
         }
+        //turn on starting points
+        var startingPoints = logics.start(STARTING_POINTS_QUANTITY);
+        startingPoints.forEach( x -> {
+            cells.get(x).setText(ON);
+        });
+
         //Create nextStep button and add it to the panel
         final JButton nextStep = new JButton(NEXT_TEXT);
-        // nextStep.addActionListener(e -> );
+        nextStep.addActionListener(e -> {
+
+        });
         this.getContentPane().add(BorderLayout.SOUTH, nextStep);
         pack();
         this.setVisible(true);

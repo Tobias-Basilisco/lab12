@@ -2,7 +2,6 @@ package it.unibo.es3;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -19,14 +18,10 @@ public class LogicsImpl implements Logics{
     private final Set<Pair<Integer, Integer>> startingPoints = new LinkedHashSet<>();
     private List<Integer> onPointsBuffer = new LinkedList<>();
 
-    public LogicsImpl(final int gridWidth, final int startingPointsQuantity){
+    public LogicsImpl(final int gridWidth){
 
         if (gridWidth < 2){
             throw new IllegalArgumentException("grid width must be at least 2");
-        }
-
-        if (startingPointsQuantity < 1){
-            throw new IllegalArgumentException("at least 1 starting point is required");
         }
 
         this.gridWidth = gridWidth;
@@ -42,6 +37,10 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> start(final int startingPointsQuantity){
+
+        if (startingPointsQuantity < 1){
+            throw new IllegalArgumentException("at least 1 starting point is required");
+        }
 
         if (startingPointsQuantity >= gridWidth * gridWidth) {
             throw new IllegalArgumentException("too many starting points");
