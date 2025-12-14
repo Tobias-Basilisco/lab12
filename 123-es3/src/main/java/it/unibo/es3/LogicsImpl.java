@@ -68,7 +68,7 @@ public class LogicsImpl implements Logics{
         onPointsBuffer = new ArrayList<>();
         stepIndex++;
         
-        startingPoints.forEach(x -> {
+        startingPoints.forEach(x -> { // volendo si potrebbero creare dei thread/workers per ogniuno 
             expandPoint(x);
         });
 
