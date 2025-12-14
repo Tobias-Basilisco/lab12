@@ -56,8 +56,12 @@ public final class GUI extends JFrame {
             for (final int i : onPoints){
                 turnOn(i);
             }
+            if (logics.IsGameOver()){
+                dispose();
+            }
         });
         this.getContentPane().add(BorderLayout.SOUTH, nextStep);
+
         pack();
         this.setVisible(true);
     }

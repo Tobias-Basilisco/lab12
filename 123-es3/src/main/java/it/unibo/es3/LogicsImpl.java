@@ -19,7 +19,6 @@ public class LogicsImpl implements Logics{
     private List<Integer> onPointsBuffer = new LinkedList<>();
 
     public LogicsImpl(final int gridWidth){
-
         if (gridWidth < 2){
             throw new IllegalArgumentException("grid width must be at least 2");
         }
@@ -37,7 +36,6 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> start(final int startingPointsQuantity){
-
         if (startingPointsQuantity < 1){
             throw new IllegalArgumentException("at least 1 starting point is required");
         }
@@ -51,14 +49,12 @@ public class LogicsImpl implements Logics{
         int pointsCreated = 0;
 
         while (pointsCreated < startingPointsQuantity){
-
             int point = random.nextInt(gridWidth * gridWidth);
             if (!startingPoints.contains(intToPair(point))){
                 startingPoints.add(intToPair(point));
                 statingPointsIndex.add(point);
                 pointsCreated++;
             }
-
         }
 
         stepIndex++;
@@ -69,7 +65,6 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> nextStep(){
-
         onPointsBuffer = new ArrayList<>();
         stepIndex++;
         
@@ -84,7 +79,6 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public boolean IsGameOver(){
-
         for (Boolean value : grid.values()) {
             if (false == value){
                 return false;
@@ -115,7 +109,6 @@ public class LogicsImpl implements Logics{
     }
 
     private void expandPoint(final Pair<Integer, Integer> position){
-        
         for (int i = (position.x() - stepIndex); i <= (position.x() + stepIndex); i++){
             turnOn(new Pair<>(i, position.y() - stepIndex));
             turnOn(new Pair<>(i, position.y() + stepIndex));
