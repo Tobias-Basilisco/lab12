@@ -13,7 +13,7 @@ public class LogicsImpl implements Logics{
 
     private final Map<Pair<Integer, Integer>, Boolean> grid = new LinkedHashMap<>();
     private int gridWidth;
-    private int stageInedex = -1;
+    private int stepInedex = -1;
     private final Set<Pair<Integer, Integer>> startingPoints = new LinkedHashSet<>();
 
     public LogicsImpl(final int gridWidth, final int startingPointsQuantity){
@@ -59,7 +59,7 @@ public class LogicsImpl implements Logics{
 
         }
 
-        stageInedex++;
+        stepInedex++;
         return Collections.unmodifiableList(statingPointsIndex);
     }
 
@@ -67,6 +67,8 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> nextStep(){
+
+        stepInedex++;
         return null;
     }
 
@@ -83,5 +85,9 @@ public class LogicsImpl implements Logics{
 
     private Pair<Integer, Integer> intToPair(final int i){
         return new Pair<>( i % gridWidth, i / gridWidth);
+    }
+
+    private void turnOn(final Pair<Integer, Integer> position){
+        grid.put(position, true);
     }
 }
