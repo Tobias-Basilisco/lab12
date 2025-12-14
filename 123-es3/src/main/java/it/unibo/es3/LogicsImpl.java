@@ -81,7 +81,14 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public boolean IsGameOver(){
-        return false;
+
+        for (Boolean value : grid.values()) {
+            if (false == value){
+                return false;
+            }
+        };
+
+        return true;
     }
 
     private int pairToInt(final Pair<Integer, Integer> pair){
