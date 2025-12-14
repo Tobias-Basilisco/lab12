@@ -46,16 +46,23 @@ public final class GUI extends JFrame {
         //turn on starting points
         var startingPoints = logics.start(STARTING_POINTS_QUANTITY);
         startingPoints.forEach( x -> {
-            cells.get(x).setText(ON);
+            turnOn(x);
         });
 
         //Create nextStep button and add it to the panel
         final JButton nextStep = new JButton(NEXT_TEXT);
         nextStep.addActionListener(e -> {
-
+            final var onPoints = logics.nextStep();
+            for (final int i : onPoints){
+                turnOn(i);
+            }
         });
         this.getContentPane().add(BorderLayout.SOUTH, nextStep);
         pack();
         this.setVisible(true);
+    }
+
+    private void turnOn(final int index){
+        cells.get(index).setText(ON);
     }
 }
