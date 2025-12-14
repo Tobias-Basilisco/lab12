@@ -13,7 +13,7 @@ public class LogicsImpl implements Logics{
 
     private final Map<Pair<Integer, Integer>, Boolean> grid = new LinkedHashMap<>();
     private int gridWidth;
-    private int stepInedex = -1;
+    private int stepIndex = -1;
     private final Set<Pair<Integer, Integer>> startingPoints = new LinkedHashSet<>();
 
     public LogicsImpl(final int gridWidth, final int startingPointsQuantity){
@@ -59,7 +59,7 @@ public class LogicsImpl implements Logics{
 
         }
 
-        stepInedex++;
+        stepIndex++;
         return Collections.unmodifiableList(statingPointsIndex);
     }
 
@@ -68,11 +68,12 @@ public class LogicsImpl implements Logics{
      */
     public List<Integer> nextStep(){
         
+        stepIndex++;
+        
         startingPoints.forEach(x -> {
             expandPoint(x);
         });
 
-        stepInedex++;
         return null;
     }
 
@@ -100,6 +101,15 @@ public class LogicsImpl implements Logics{
     }
 
     private void expandPoint(final Pair<Integer, Integer> position){
+        
+        for (int i = (position.x() - stepIndex); i <= (position.x() + stepIndex); i++){
+            turnOn(new Pair<>(i, position.y() - stepIndex));
+            turnOn(new Pair<>(i, position.y() + stepIndex));
+        }
 
+        for (int j = (position.y() + 1 - stepIndex); j < (position.y() + stepIndex); j++){
+            turnOn(new Pair<>(position.x() - stepIndex, j));
+            turnOn(new Pair<>(position.x() + stepIndex, j));
+        }
     }
 }
