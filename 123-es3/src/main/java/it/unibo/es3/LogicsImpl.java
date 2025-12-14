@@ -67,6 +67,10 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> nextStep(){
+        
+        startingPoints.forEach(x -> {
+            expandPoint(x);
+        });
 
         stepInedex++;
         return null;
@@ -88,6 +92,14 @@ public class LogicsImpl implements Logics{
     }
 
     private void turnOn(final Pair<Integer, Integer> position){
+        if (position.x() < 0 || position.x() >= gridWidth 
+            || position.y() < 0 || position.y() >= gridWidth){
+                return;
+        }
         grid.put(position, true);
+    }
+
+    private void expandPoint(final Pair<Integer, Integer> position){
+
     }
 }
