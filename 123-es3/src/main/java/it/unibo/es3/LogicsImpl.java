@@ -2,8 +2,10 @@ package it.unibo.es3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -15,6 +17,7 @@ public class LogicsImpl implements Logics{
     private int gridWidth;
     private int stepIndex = -1;
     private final Set<Pair<Integer, Integer>> startingPoints = new LinkedHashSet<>();
+    private List<Integer> onPointsBuffer = new LinkedList<>();
 
     public LogicsImpl(final int gridWidth, final int startingPointsQuantity){
 
@@ -67,14 +70,15 @@ public class LogicsImpl implements Logics{
      * {@inheritDoc}
      */
     public List<Integer> nextStep(){
-        
+
+        onPointsBuffer = new ArrayList<>();
         stepIndex++;
         
         startingPoints.forEach(x -> {
             expandPoint(x);
         });
 
-        return null;
+        return Collections.unmodifiableList(onPointsBuffer);
     }
 
     /**
@@ -100,11 +104,15 @@ public class LogicsImpl implements Logics{
     }
 
     private void turnOn(final Pair<Integer, Integer> position){
-        if (position.x() < 0 || position.x() >= gridWidth 
-            || position.y() < 0 || position.y() >= gridWidth){
-                return;
+        if (position.x() < 0 
+            || position.x() >= gridWidth 
+            || position.y() < 0 
+            || position.y() >= gridWidth
+            || true == grid.get(position)){
+            return;
         }
         grid.put(position, true);
+        onPointsBuffer.add(pairToInt(position));
     }
 
     private void expandPoint(final Pair<Integer, Integer> position){
